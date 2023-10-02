@@ -41,15 +41,15 @@ class HomePage extends StatelessWidget {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.camera),
+              icon: Icon(Icons.branding_watermark),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
+              icon: Icon(Icons.square),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
+              icon: Icon(Icons.group),
               label: '',
             ),
           ],

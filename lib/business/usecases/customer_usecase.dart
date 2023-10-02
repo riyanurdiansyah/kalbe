@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:kalbe/business/entities/customer.dart';
 import 'package:kalbe/business/repositories/customer_repository.dart';
@@ -20,8 +19,7 @@ class AddCustomer {
 
   AddCustomer(this.repository);
 
-  Future<Either<CustomFailure, CustomerEntity>> call(
-      CustomerModel brand) async {
+  Future<Either<CustomFailure, bool>> call(Map<String, dynamic> brand) async {
     return await repository.addCustomer(brand);
   }
 }

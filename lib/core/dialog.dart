@@ -2,6 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:kalbe/business/entities/brand.dart';
 import 'package:kalbe/business/entities/customer.dart';
 import 'package:kalbe/business/entities/product.dart';
 import 'package:kalbe/presentation/controllers/home_controller.dart';
@@ -71,7 +72,7 @@ class AppDialog {
                   showSearchBox: true,
                   searchFieldProps: TextFieldProps(
                     decoration: InputDecoration(
-                      hintText: "Masukkan nama produk",
+                      hintText: "Masukkan nama customer",
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 12),
                       border: OutlineInputBorder(
@@ -140,6 +141,268 @@ class AppDialog {
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () => homeC.addPembelian(),
+                  child: const Text("Tambah"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static dialogAddBrand() {
+    final homeC = Get.put(HomeController());
+    return Get.defaultDialog(
+      title: "Add Brand",
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 35),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Nama Brand"),
+              const SizedBox(
+                height: 6,
+              ),
+              TextFormField(
+                controller: homeC.tcNamaBrand,
+                // validator: (val) => Validators.requiredField(val!),
+                onChanged: (val) {
+                  homeC.qty = int.parse(val);
+                },
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () => homeC.addBrand(),
+                  child: const Text("Tambah"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static dialogAddCustomer() {
+    final homeC = Get.put(HomeController());
+    return Get.defaultDialog(
+      title: "Add Customer",
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 35),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Nama"),
+              const SizedBox(
+                height: 6,
+              ),
+              TextFormField(
+                controller: homeC.tcNamaCustomer,
+                // validator: (val) => Validators.requiredField(val!),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              const Text("Alamat"),
+              const SizedBox(
+                height: 6,
+              ),
+              TextFormField(
+                controller: homeC.tcAlamatCustomer,
+                // validator: (val) => Validators.requiredField(val!),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Obx(
+                () => RadioListTile(
+                  title: const Text("Perempuan"),
+                  value: 0,
+                  groupValue: homeC.bitGender.value,
+                  onChanged: (value) {
+                    homeC.bitGender.value = value ?? 99;
+                  },
+                ),
+              ),
+              Obx(
+                () => RadioListTile(
+                  title: const Text("Laki-laki"),
+                  value: 1,
+                  groupValue: homeC.bitGender.value,
+                  onChanged: (value) {
+                    homeC.bitGender.value = value ?? 99;
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () => homeC.addCustomer(),
+                  child: const Text("Tambah"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static dialogAddProduct() {
+    final homeC = Get.put(HomeController());
+    return Get.defaultDialog(
+      title: "Add Product",
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 35),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Brand"),
+              const SizedBox(
+                height: 6,
+              ),
+              DropdownSearch<BrandEntity>(
+                popupProps: PopupProps.dialog(
+                  showSearchBox: true,
+                  searchFieldProps: TextFieldProps(
+                    decoration: InputDecoration(
+                      hintText: "Masukkan nama brand",
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 12),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+                asyncItems: (String filter) =>
+                    homeC.brandRemoteDataSource.getBrand(),
+                itemAsString: (BrandEntity u) => u.txtBrandName,
+                onChanged: (BrandEntity? data) {
+                  homeC.brandId = data?.intBrandID ?? 0;
+                },
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                    contentPadding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              const Text("Produk Code"),
+              const SizedBox(
+                height: 6,
+              ),
+              TextFormField(
+                controller: homeC.tcProductCode,
+                onChanged: (val) {},
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              const Text("Product Name"),
+              const SizedBox(
+                height: 6,
+              ),
+              TextFormField(
+                controller: homeC.tcProductName,
+                // validator: (val) => Validators.requiredField(val!),
+                onChanged: (val) {},
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () => homeC.addProduct(),
                   child: const Text("Tambah"),
                 ),
               ),

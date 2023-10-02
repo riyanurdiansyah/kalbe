@@ -7,7 +7,8 @@ import '../../core/faiures.dart';
 abstract class BrandRepository {
   Future<Either<CustomFailure, List<BrandEntity>>> getBrand();
 
-  Future<Either<CustomFailure, BrandEntity>> addBrand(BrandModel brand);
+  Future<Either<CustomFailure, BrandEntity>> addBrand(
+      Map<String, dynamic> brand);
 
   Future<Either<CustomFailure, String>> addBrandToCache(List<BrandModel> brand);
 }

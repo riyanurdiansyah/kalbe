@@ -21,7 +21,8 @@ class BrandRepositoryImpl implements BrandRepository {
   });
 
   @override
-  Future<Either<CustomFailure, BrandEntity>> addBrand(BrandModel brand) async {
+  Future<Either<CustomFailure, BrandEntity>> addBrand(
+      Map<String, dynamic> brand) async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {

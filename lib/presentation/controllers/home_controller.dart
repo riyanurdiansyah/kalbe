@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kalbe/business/entities/brand.dart';
 import 'package:kalbe/business/entities/customer.dart';
@@ -45,6 +46,9 @@ class HomeController extends GetxController {
   final RxInt _indexTab = 0.obs;
   RxInt get indexTab => _indexTab;
 
+  final RxInt _bitGender = 99.obs;
+  RxInt get bitGender => _bitGender;
+
   final RxList<BrandEntity> _brands = <BrandEntity>[].obs;
   RxList<BrandEntity> get brands => _brands;
 
@@ -57,10 +61,17 @@ class HomeController extends GetxController {
   final RxList<PembelianEntity> _pembelians = <PembelianEntity>[].obs;
   RxList<PembelianEntity> get pembelians => _pembelians;
 
+  final TextEditingController tcNamaBrand = TextEditingController();
+  final TextEditingController tcNamaCustomer = TextEditingController();
+  final TextEditingController tcAlamatCustomer = TextEditingController();
+  final TextEditingController tcProductCode = TextEditingController();
+  final TextEditingController tcProductName = TextEditingController();
+
   int customerId = 0;
   String customerName = "";
   int productId = 0;
   int qty = 0;
+  int brandId = 0;
 
   @override
   void onInit() async {
@@ -158,6 +169,46 @@ class HomeController extends GetxController {
         await AddPembelian(pembelianRepository).call(bodyPembelian);
     response.fold((fail) => log(fail.message), (data) {
       getPembelian();
+    });
+  }
+
+  Future addBrand() async {
+    Get.back();
+    final bodyBrand = {
+      "txtBrandName": tcNamaBrand.text,
+    };
+
+    final response = await AddBrand(brandRepository).call(bodyBrand);
+    response.fold((fail) => log(fail.message), (data) {
+      getBrands();
+    });
+  }
+
+  Future addCustomer() async {
+    Get.back();
+    final bodyCustomer = {
+      "txtCustomerName": tcNamaCustomer.text,
+      "txtCustomerAddress": tcAlamatCustomer.text,
+      "bitGender": _bitGender.value
+    };
+
+    final response = await AddCustomer(customerRepository).call(bodyCustomer);
+    response.fold((fail) => log(fail.message), (data) {
+      getCustomer();
+    });
+  }
+
+  Future addProduct() async {
+    Get.back();
+    final bodyProduct = {
+      "txtProductCode": tcProductCode.text,
+      "txtProductName": tcProductName.text,
+      "intBrandID": brandId,
+    };
+
+    final response = await AddProduct(productRepository).call(bodyProduct);
+    response.fold((fail) => log(fail.message), (data) {
+      getProducts();
     });
   }
 }

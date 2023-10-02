@@ -12,10 +12,10 @@ class BrandRemoteDataSourceImpl implements BrandRemoteDataSource {
   }
 
   @override
-  Future<BrandModel> addBrand(BrandModel brand) async {
+  Future<BrandModel> addBrand(Map<String, dynamic> brand) async {
     final response = await dio.post(
       brandUrl,
-      data: brand.toJson(),
+      data: brand,
     );
     if (response.statusCode == 201) {
       return BrandModel.fromJson(response.data["data"]);

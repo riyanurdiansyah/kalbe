@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:kalbe/core/dialog.dart';
 
 import '../controllers/home_controller.dart';
+import 'empty_page.dart';
 
 class BrandPage extends StatelessWidget {
   BrandPage({super.key});
@@ -16,15 +18,19 @@ class BrandPage extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => AppDialog.dialogAddBrand(),
             icon: const Icon(
               Icons.add_rounded,
             ),
           )
         ],
       ),
-      body: Obx(
-        () => ListView(
+      body: Obx(() {
+        if (_homeC.brands.isEmpty) {
+          return const EmptyPage();
+        }
+
+        return ListView(
           children: List.generate(
             _homeC.brands.length,
             (index) => ListTile(
@@ -42,8 +48,8 @@ class BrandPage extends StatelessWidget {
                   ),
                 )),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

@@ -12,13 +12,13 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     this.dio = dio ?? Dio();
   }
   @override
-  Future<ProductModel> addProduct(ProductModel product) async {
+  Future<bool> addProduct(Map<String, dynamic> product) async {
     final response = await dio.post(
       productUrl,
-      data: product.toJson(),
+      data: product,
     );
     if (response.statusCode == 201) {
-      return ProductModel.fromJson(response.data["data"]);
+      return true;
     }
 
     throw CustomException(

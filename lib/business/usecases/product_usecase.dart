@@ -14,13 +14,13 @@ class GetProduct {
   }
 }
 
-class AddBrand {
+class AddProduct {
   final ProductRepository repository;
 
-  AddBrand(this.repository);
+  AddProduct(this.repository);
 
-  Future<Either<CustomFailure, ProductEntity>> call(ProductModel brand) async {
-    return await repository.addProduct(brand);
+  Future<Either<CustomFailure, bool>> call(Map<String, dynamic> product) async {
+    return await repository.addProduct(product);
   }
 }
 

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kalbe/core/dialog.dart';
 import 'package:kalbe/presentation/controllers/home_controller.dart';
 import 'package:intl/intl.dart';
+import 'package:kalbe/presentation/pages/empty_page.dart';
 
 class PembelianPage extends StatelessWidget {
   PembelianPage({super.key});
@@ -23,8 +24,12 @@ class PembelianPage extends StatelessWidget {
           )
         ],
       ),
-      body: Obx(
-        () => ListView(
+      body: Obx(() {
+        if (_homeC.pembelians.isEmpty) {
+          return const EmptyPage();
+        }
+
+        return ListView(
           children: List.generate(
             _homeC.pembelians.length,
             (index) => ListTile(
@@ -54,8 +59,8 @@ class PembelianPage extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

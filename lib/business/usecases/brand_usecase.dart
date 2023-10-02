@@ -19,7 +19,8 @@ class AddBrand {
 
   AddBrand(this.repository);
 
-  Future<Either<CustomFailure, BrandEntity>> call(BrandModel brand) async {
+  Future<Either<CustomFailure, BrandEntity>> call(
+      Map<String, dynamic> brand) async {
     return await repository.addBrand(brand);
   }
 }

@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:kalbe/business/entities/brand.dart';
 import 'package:dartz/dartz.dart';
 import 'package:kalbe/business/entities/product.dart';
 import 'package:kalbe/business/repositories/product_repository.dart';
@@ -23,8 +20,8 @@ class ProductRepositoryImpl implements ProductRepository {
   });
 
   @override
-  Future<Either<CustomFailure, ProductEntity>> addProduct(
-      ProductModel product) async {
+  Future<Either<CustomFailure, bool>> addProduct(
+      Map<String, dynamic> product) async {
     try {
       bool hasConnection = await InternetConnectionChecker().hasConnection;
       if (hasConnection) {

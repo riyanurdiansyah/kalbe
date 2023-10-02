@@ -20,8 +20,8 @@ class CustomerRepositoryImpl implements CustomerRepository {
   });
 
   @override
-  Future<Either<CustomFailure, CustomerEntity>> addCustomer(
-      CustomerModel customer) async {
+  Future<Either<CustomFailure, bool>> addCustomer(
+      Map<String, dynamic> customer) async {
     try {
       bool hasConnection = await InternetConnectionChecker().hasConnection;
       if (hasConnection) {
